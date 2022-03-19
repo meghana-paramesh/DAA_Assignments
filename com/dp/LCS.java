@@ -55,8 +55,11 @@ public class LCS {
 
             while((line = bufferedReader.readLine()) != null){
                 String[] tokens = line.split(",");
-                Directions[][] b = LCSLength(tokens[0], tokens[1]).b;
-                StringBuilder sb = (recontructLCS(b, tokens[0], tokens[0].length(), tokens[1].length(), new StringBuilder()));
+                LCS lcs = new LCS();
+                TableBAndC tableBAndC = lcs.LCSLength(tokens[0].toCharArray(), tokens[1].toCharArray());
+                int[][] c = tableBAndC.c;
+                Directions[][] b = tableBAndC.b;
+                StringBuilder sb = (lcs.reconstructLCS(b, tokens[0].toCharArray(), tokens[0].length(), tokens[1].length(), new StringBuilder()));
                 outputFileWriter.writeToAFile(writer, sb.toString()+"\n");
             }
 
@@ -71,15 +74,16 @@ public class LCS {
 
     /*
     Function from [Cormen, 2009]
-    @param input strings X and Y
-    @returns both table c and d
+    @param X input sequence
+           Y input sequence
+    @return both table b and c
 
     @description Find LCS length by filling in tables b and c.
                  Based on LCS-LENGTH pseudocode, [Cormen, 2009] p. 394.
      */
-    static TableBAndC LCSLength(String X, String Y){
-        int m = X.length();
-        int n = Y.length();
+    TableBAndC LCSLength(char[] X, char[] Y){
+        int m = X.length;
+        int n = Y.length;
 
         Directions[][] b = new Directions[m+1][n+1];
         int[][] c = new int[m+1][n+1];
@@ -94,10 +98,10 @@ public class LCS {
 
         for(int i=1; i<=m; i++){
             for(int j=1; j<=n; j++){
-                if(X.charAt(i-1)==Y.charAt(j-1)){
+                if(X[i-1]==Y[j-1]){
                     c[i][j] = c[i-1][j-1]+1;
                     b[i][j] = Directions.UPLEFT;
-                }else if(c[i-1][j]>c[i][j-1]){
+                }else if(c[i-1][j]>=c[i][j-1]){
                     c[i][j] = c[i-1][j];
                     b[i][j] = Directions.UP;
                 }else{
@@ -115,32 +119,30 @@ public class LCS {
 
     /*
     Function from [Cormen, 2009]
-    @param b is the table to help construct an optimal solution.
-             b[i,j] points to the table entry corresponding to
-             the optimal subproblem solution chosen while computing c[i,j]
-           X is one of the input strings to construct the optimal solution
-           i, j are last row and column of the table b respectively
-           finalLCS is the StringBuilder object to construct the LCS
-    @return the StringBuilder object which is the longest common subsequence
+    @param b is the table that helps reconstruct the longest common subsequence by tracing back the optimal solution
+           X is one of the input sequences.
+           i, j are last row and column of the table b respectively.
+           finalLCS is the StringBuilder object to construct the LCS.
+    @return the StringBuilder object which is the longest common subsequence.
 
     @description Reconstruct LCS using table b.
                  Based on PRINT-LCS pseudocode, [Cormen, 2009] p. 395.
      */
-    static StringBuilder recontructLCS(Directions[][] b, String X, int i, int j, StringBuilder finalLCS){
+    StringBuilder reconstructLCS(Directions[][] b, char[] X, int i, int j, StringBuilder finalLCS){
         if(i==0 || j==0)
             return new StringBuilder();
 
         if(b[i][j]==Directions.UPLEFT){
-            recontructLCS(b, X, i-1, j-1, finalLCS);
-            finalLCS.append(X.charAt(i-1));
+            reconstructLCS(b, X, i-1, j-1, finalLCS);
+            finalLCS.append(X[i-1]);
         }
 
         else if(b[i][j]==Directions.UP){
-            recontructLCS(b, X, i-1, j, finalLCS);
+            reconstructLCS(b, X, i-1, j, finalLCS);
         }
 
         else{
-            recontructLCS(b, X, i, j-1, finalLCS);
+            reconstructLCS(b, X, i, j-1, finalLCS);
         }
         return finalLCS;
     }
