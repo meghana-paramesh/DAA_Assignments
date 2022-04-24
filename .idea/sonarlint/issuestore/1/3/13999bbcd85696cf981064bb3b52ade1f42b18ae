@@ -1,0 +1,25 @@
+
+\
+java:S1192	"FDefine a constant instead of duplicating this literal "white" 4 times.(‰õÆÓ
+
+java:S1319U"fThe type of "queue" should be an interface such as "List" rather than the implementation "LinkedList".(¨Æ ßşÿÿÿÿ
+f
+java:S11490"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(ãá£ò
+k
+java:S1149M"PReplace the synchronized class "Stack" by an unsynchronized one such as "Deque".(×”°²ùÿÿÿÿ
+c	java:S100"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(£şö‡
+S	java:S106"9Replace this use of System.out or System.err by a logger.(üÁ÷–øÿÿÿÿ
+T
+java:S1155">Use isEmpty() to check whether the collection is empty or not.(İÃŸš
+N	java:S106"9Replace this use of System.out or System.err by a logger.(†²®½
+S	java:S106("9Replace this use of System.out or System.err by a logger.(Î­éşÿÿÿÿ
+c	java:S1003"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(½ğ¡Ä
+h	java:S100:"NRename this method name to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(•ß­òøÿÿÿÿ
+S	java:S106="9Replace this use of System.out or System.err by a logger.(¼ËÄıÿÿÿÿ
+S	java:S106J"9Replace this use of System.out or System.err by a logger.(²³Ûàûÿÿÿÿ
+E
+java:S1197]"*Move the array designators [] to the type.(º ìıÿÿÿÿ
+T	java:S106Œ"9Replace this use of System.out or System.err by a logger.(ƒ‚µûÿÿÿÿ
+Q	java:S125"<This block of commented-out lines of code should be removed.(‘°¥
+O	java:S106’"9Replace this use of System.out or System.err by a logger.(»ÿ¶ñ
+W	java:S125”"<This block of commented-out lines of code should be removed.(—Ûóäûÿÿÿÿ
